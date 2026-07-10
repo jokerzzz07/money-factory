@@ -1,0 +1,6 @@
+{
+  "name": "Money Factory",
+  "description": "Institutional-grade trading education, dynamic indicator insights, and professional mentorship suite.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
