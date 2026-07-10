@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { 
   Users, 
@@ -6,8 +6,6 @@ import {
   Star, 
   ShieldCheck, 
   ArrowRight, 
-  Apple, 
-  Play, 
   BookOpen, 
   Activity, 
   TrendingUp, 
@@ -18,10 +16,9 @@ import {
   ChevronRight, 
   CheckCircle2, 
   TrendingDown, 
-  DollarSign 
+  DollarSign
 } from "lucide-react";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import CoursesList from "./components/CoursesList";
 import TradingChart from "./components/TradingChart";
 import AICoach from "./components/AICoach";
@@ -59,6 +56,14 @@ function AnimatedStat({ value, suffix = "", prefix = "", decimals = 0 }: { value
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>("home");
+  const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" ? window.innerWidth < 768 : false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Hero image path generated from image_generator tool
   const heroImagePath = "/src/assets/images/professional_trader_1783620398111.jpg";
@@ -68,7 +73,7 @@ export default function App() {
   const handleExploreCourses = () => setActiveTab("courses");
 
   return (
-    <div id="app-root-container" className="flex flex-col min-h-screen bg-white text-charcoal font-sans antialiased selection:bg-primary-blue/10 selection:text-primary-blue">
+    <div id="app-root-container" className="flex flex-col min-h-screen overflow-x-hidden bg-white text-charcoal font-sans antialiased selection:bg-primary-blue/10 selection:text-primary-blue">
       {/* Header section */}
       <Header activeTab={activeTab} setActiveTab={setActiveTab} />
 
@@ -82,24 +87,84 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.4 }}
-              className="space-y-24 pb-24"
+              className="space-y-8 pb-8 sm:space-y-24 sm:pb-24"
             >
               {/* Hero Section - Premium Two-Column Layout */}
               <section
                 id="hero-section"
-                className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white py-16 sm:py-24 lg:py-28"
+                className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white py-6 sm:py-24 lg:py-28"
               >
-                {/* Decorative grid pattern in background */}
-                <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#2563EB_1px,transparent_1px),linear-gradient(to_bottom,#2563EB_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-[0.02]" />
+                <div className="absolute inset-0 -z-10 overflow-hidden">
+                  <div className="absolute inset-0 bg-[linear-gradient(to_right,#2563EB_1px,transparent_1px),linear-gradient(to_bottom,#2563EB_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-[0.02]" />
+                  <div className="absolute left-1/2 top-10 h-64 w-64 -translate-x-1/2 rounded-full bg-blue-500/10 blur-3xl" />
+                  <div className="absolute right-8 top-20 h-48 w-48 rounded-full bg-emerald-500/8 blur-3xl" />
+                  <div className="absolute bottom-10 left-10 h-44 w-44 rounded-full bg-indigo-500/8 blur-3xl" />
+                  <svg className="absolute inset-0 h-full w-full opacity-[0.08]" viewBox="0 0 600 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M40 320C110 290 150 240 210 220C270 200 320 180 380 140C430 110 470 70 560 60" stroke="#2563EB" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M40 340C110 315 150 270 220 250C290 230 330 210 390 190C455 168 500 140 560 90" stroke="#10B981" strokeWidth="1.2" strokeLinecap="round" strokeDasharray="4 6" />
+                    <path d="M50 120H250" stroke="#0F172A" strokeOpacity="0.2" strokeWidth="1" />
+                    <path d="M350 90H520" stroke="#0F172A" strokeOpacity="0.16" strokeWidth="1" />
+                  </svg>
+
+                  <motion.div
+                    animate={{ y: [0, -8, 0], x: [0, 6, 0] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute left-[6%] top-[10%] rounded-2xl border border-slate-200/50 bg-white/70 p-3 shadow-[0_10px_30px_rgba(11,19,43,0.05)] backdrop-blur-md"
+                  >
+                    <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-slate-500">NIFTY 50</p>
+                    <p className="mt-1 text-sm font-semibold text-emerald-500">+2.45%</p>
+                  </motion.div>
+
+                  <motion.div
+                    animate={{ y: [0, 8, 0], x: [0, -4, 0] }}
+                    transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute right-[8%] top-[14%] rounded-2xl border border-slate-200/50 bg-white/70 p-3 shadow-[0_10px_30px_rgba(11,19,43,0.05)] backdrop-blur-md"
+                  >
+                    <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-slate-500">Profit Today</p>
+                    <p className="mt-1 text-sm font-semibold text-slate-800">+₹12,540</p>
+                  </motion.div>
+
+                  <motion.div
+                    animate={{ y: [0, -6, 0], x: [0, 4, 0] }}
+                    transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute bottom-[18%] left-[12%] rounded-2xl border border-slate-200/50 bg-white/70 p-3 shadow-[0_10px_30px_rgba(11,19,43,0.05)] backdrop-blur-md"
+                  >
+                    <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-slate-500">Win Rate</p>
+                    <p className="mt-1 text-sm font-semibold text-slate-800">87%</p>
+                  </motion.div>
+
+                  <motion.div
+                    animate={{ y: [0, 7, 0], x: [0, -5, 0] }}
+                    transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute bottom-[10%] right-[10%] rounded-2xl border border-slate-200/50 bg-white/70 p-3 shadow-[0_10px_30px_rgba(11,19,43,0.05)] backdrop-blur-md"
+                  >
+                    <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-slate-500">Buy Signal</p>
+                    <p className="mt-1 text-sm font-semibold text-slate-800">Money Factory Indicator</p>
+                  </motion.div>
+                </div>
 
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                  <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[45%_55%] lg:gap-16">
+                  <div className="mb-5 flex flex-wrap items-center justify-center gap-2 rounded-full border border-slate-200/70 bg-white/75 px-3 py-2 shadow-[0_8px_24px_rgba(11,19,43,0.03)] backdrop-blur-md sm:mb-8 sm:justify-between sm:gap-3 sm:px-4 sm:py-3 sm:px-5 lg:mb-10">
+                    <div className="flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.24em] text-slate-500 sm:text-[10px]">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
+                      <span>Trusted by 3,000+ Students</span>
+                    </div>
+                    <div className="flex flex-wrap items-center justify-center gap-2 text-[9px] font-semibold uppercase tracking-[0.24em] text-slate-400 sm:gap-4 sm:text-[10px]">
+                      {['Forex Education', 'Live Market Learning', 'Premium Indicators', 'Expert Mentorship'].map((label) => (
+                        <div key={label} className="flex items-center gap-1.5 opacity-80">
+                          <CheckCircle2 className="h-3 w-3 text-slate-400" />
+                          <span>{label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 items-center gap-8 sm:gap-12 lg:grid-cols-[45%_55%] lg:gap-16">
                     
                     {/* Left Column - Elite FinTech Typography & CTA */}
-                    <div id="hero-left-col" className="space-y-8 text-left">
+                    <div id="hero-left-col" className="space-y-4 text-center sm:space-y-8 sm:text-left">
                       
                       {/* Premium Trust Badge */}
-                      <div className="inline-flex items-center gap-2 rounded-full bg-primary-blue/5 px-4 py-1.5 border border-primary-blue/10 shadow-[0_2px_12px_rgba(37,99,235,0.03)]">
+                      <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-primary-blue/10 bg-primary-blue/5 px-3 py-1 shadow-[0_2px_12px_rgba(37,99,235,0.03)] sm:mx-0 sm:px-4 sm:py-1.5">
                         <Star className="h-3 w-3 text-gold-premium fill-gold-premium" />
                         <span className="text-xs font-bold text-slate-800 tracking-wide">
                           Trustpilot <span className="text-primary-blue font-extrabold">4.9/5</span> Rating · Elite Financial Academy
@@ -107,42 +172,43 @@ export default function App() {
                       </div>
  
                       {/* Large Premium Headline */}
-                      <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[68px] leading-[1.05] font-black text-[#0B132B] tracking-tight">
-                        Trade with the <br />
-                        <span className="bg-gradient-to-r from-primary-blue to-blue-700 bg-clip-text text-transparent">
-                          Precision of the 1%
+                      <h1 className="mx-auto mb-2 max-w-[300px] text-[2.1rem] leading-[1.05] font-extrabold tracking-[-0.03em] text-[#0B132B] sm:mx-0 sm:max-w-[430px] sm:text-[clamp(2.4rem,5vw,4.7rem)] lg:max-w-[560px] lg:text-[clamp(3rem,5.2vw,5.6rem)] xl:max-w-[620px] xl:text-[clamp(3.2rem,5.6vw,6.2rem)]">
+                        <span className="block">Trade Smarter</span>
+                        <span className="mt-1 block">With Premium</span>
+                        <span className="mt-1 block bg-gradient-to-r from-[#2563EB] via-[#3B82F6] to-[#2563EB] bg-clip-text text-transparent">
+                          Buy & Sell Signals
                         </span>
                       </h1>
  
                       {/* Description Subheadline with increased line-spacing */}
-                      <p className="text-base sm:text-lg text-slate-500 leading-relaxed max-w-xl font-medium">
-                        Skip retail trendlines and lagging indicators. Money Factory empowers you with pure, unmanipulated algorithmic orderflow mechanics, premium indicators, and live execution scripts.
+                      <p className="mx-auto mb-4 max-w-[90%] text-[15px] leading-5 font-medium text-slate-500 sm:mx-0 sm:max-w-xl sm:text-base sm:text-lg sm:leading-relaxed">
+                        Master Forex trading with professional strategies, premium indicators, and real-time Buy & Sell Signals.
                       </p>
 
 
  
                       {/* Redesigned Minimal & Premium Feature Cards */}
-                      <div id="hero-features-list" className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl pt-4">
+                      <div id="hero-features-list" className="mx-auto mt-0 grid max-w-[94%] grid-cols-1 gap-2 pt-0 sm:mx-0 sm:max-w-xl sm:grid-cols-2 sm:gap-4 sm:pt-4">
                         {[
-                          { title: "Professional Courses", desc: "Master institutional SMC & Orderflow", icon: BookOpen },
-                          { title: "Premium Indicators", desc: "Real-time FVG & Liquidity sweeps", icon: Activity },
-                          { title: "Live Market Sessions", desc: "Daily interactive tape reading", icon: Video },
-                          { title: "Trading Mentorship", desc: "1-on-1 feedback from funded experts", icon: Users },
-                          { title: "Mobile Learning App", desc: "Study & get real-time signal feeds", icon: Smartphone }
+                          { title: "Forex Full Course", desc: "Basic to Advanced • 4 Entry Setups", icon: BookOpen },
+                          { title: "Money Factory Indicator", desc: "Advanced Buy & Sell Signals", icon: Activity },
+                          { title: "Daily Live Trades", desc: "Live Market Sessions on Telegram", icon: Video },
+                          { title: "Trading Mentorship", desc: "1-on-1 Guidance & Strategy Support", icon: Users },
+                          { title: "Mobile Learning App", desc: "Learn Anywhere • Real-Time Signals", icon: Smartphone }
                         ].map((feat, index) => {
                           const IconComponent = feat.icon;
                           return (
                             <motion.div 
                               key={index}
                               whileHover={{ y: -4, scale: 1.01 }}
-                              className="flex items-start gap-4 p-4 rounded-2xl bg-white/60 backdrop-blur-md border border-slate-100 shadow-[0_4px_20px_-2px_rgba(11,19,43,0.02)] hover:border-slate-200/80 hover:shadow-[0_12px_24px_-4px_rgba(11,19,43,0.06)] transition-all duration-300 cursor-default"
+                              className="flex items-start gap-2.5 rounded-[16px] border border-slate-100/80 bg-white/60 p-2.5 shadow-[0_6px_22px_-4px_rgba(11,19,43,0.08)] backdrop-blur-md transition-all duration-300 hover:border-slate-200/80 hover:shadow-[0_12px_24px_-4px_rgba(11,19,43,0.08)] cursor-default sm:gap-4 sm:rounded-2xl sm:p-4"
                             >
-                              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50/50 text-primary-blue shrink-0 border border-blue-100/30">
-                                <IconComponent className="h-5 w-5" />
+                              <div className="flex h-8 w-8 items-center justify-center rounded-xl border border-blue-100/30 bg-gradient-to-br from-blue-50 to-indigo-50/50 text-primary-blue shrink-0 sm:h-10 sm:w-10">
+                                <IconComponent className="h-[18px] w-[18px] sm:h-5 sm:w-5" />
                               </div>
-                              <div className="space-y-1">
-                                <h4 className="text-xs font-bold text-[#0B132B] tracking-tight leading-none">{feat.title}</h4>
-                                <p className="text-[10px] text-slate-400 font-semibold mt-1 leading-snug">{feat.desc}</p>
+                              <div className="flex-1 space-y-1">
+                                <h4 className="text-[16px] font-bold leading-[1.2] tracking-tight text-[#0B132B] sm:text-xs sm:font-bold">{feat.title}</h4>
+                                <p className="mt-1 text-[13px] font-medium leading-[1.4] text-slate-500/80 sm:text-[10px] sm:font-semibold">{feat.desc}</p>
                               </div>
                             </motion.div>
                           );
@@ -150,31 +216,43 @@ export default function App() {
                       </div>
  
                       {/* Download App badges row */}
-                      <div id="hero-download-app-panel" className="space-y-3 pt-6 border-t border-slate-100 max-w-md">
+                      <div id="hero-download-app-panel" className="mx-auto mt-4 max-w-lg space-y-3 border-t border-slate-100 pt-4 sm:mx-0 sm:mt-6 sm:space-y-4 sm:pt-6">
                         <h4 className="text-[10px] font-bold tracking-wider text-slate-400 uppercase">
                           Download the Money Factory App
                         </h4>
-                        <div className="flex items-center gap-3">
+                        <div className="flex flex-wrap items-center gap-3 sm:gap-5">
                           <a
                             id="hero-app-store-badge"
-                            href="#app-store"
-                            className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2.5 rounded-xl border border-white/5 hover:bg-black transition-all duration-200 shadow-sm"
+                            href="https://apps.apple.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex min-h-[72px] w-full max-w-[230px] items-center gap-3 rounded-xl border border-white/5 bg-slate-900 px-5 py-3.5 text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-black hover:shadow-md sm:min-h-[76px] sm:max-w-[240px]"
                           >
-                            <Apple className="h-4 w-4 fill-white shrink-0" />
+                            <svg viewBox="0 0 24 24" className="h-7 w-7 shrink-0 sm:h-8 sm:w-8" fill="currentColor" aria-hidden="true">
+                              <path d="M17.05 12.31c-.02-2.2 1.8-3.25 1.88-3.3-1.02-1.49-2.61-1.7-3.17-1.72-1.35-.14-2.64.79-3.33.79-.69 0-1.76-.77-2.89-.75-1.49.02-2.86.87-3.63 2.2-1.55 2.69-.4 6.67 1.11 8.86.74 1.07 1.62 2.28 2.77 2.24 1.11-.05 1.53-.72 2.87-.72 1.34 0 1.72.72 2.9.7 1.2-.02 1.96-1.08 2.69-2.16.84-1.24 1.19-2.44 1.21-2.5-.03-.01-2.32-.89-2.34-3.57ZM15.33 4.43c.57-.69.96-1.65.85-2.61-.82.03-1.81.55-2.4 1.24-.53.61-.99 1.58-.87 2.51.92.07 1.86-.46 2.42-1.14Z"/>
+                            </svg>
                             <div className="text-left leading-tight">
-                              <span className="text-[8px] text-gray-400 block uppercase font-semibold">Download on the</span>
-                              <span className="text-[10px] font-bold font-sans">App Store</span>
+                              <span className="block text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-400">Download on the</span>
+                              <span className="text-[18px] font-bold font-sans sm:text-[19px]">App Store</span>
                             </div>
                           </a>
                           <a
                             id="hero-google-play-badge"
-                            href="#google-play"
-                            className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2.5 rounded-xl border border-white/5 hover:bg-black transition-all duration-200 shadow-sm"
+                            href="https://play.google.com/store"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex min-h-[72px] w-full max-w-[230px] items-center gap-3 rounded-xl border border-white/5 bg-slate-900 px-5 py-3.5 text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-black hover:shadow-md sm:min-h-[76px] sm:max-w-[240px]"
                           >
-                            <Play className="h-4 w-4 fill-white shrink-0" />
+                            <svg viewBox="0 0 24 24" className="h-7 w-7 shrink-0 sm:h-8 sm:w-8" aria-hidden="true">
+                              <path fill="#FFC107" d="M3.6 2.2A1 1 0 0 0 3 3.1v17.8a1 1 0 0 0 1.6.9l9.6-8.9-9.6-8.9Z"/>
+                              <path fill="#FF3D00" d="M15.2 12.5 13.4 10.7l-9.6 8.9a1 1 0 0 0 1.4.1l10.4-8.2Z"/>
+                              <path fill="#4CAF50" d="m15.2 11.5 1.4-1.4a1 1 0 0 0 0-1.4l-1.4-1.4-10.4 8.2 10.4 8.2 1.4-1.4a1 1 0 0 0 0-1.4Z"/>
+                              <path fill="#1976D2" d="m15.2 12.5 10.4-8.2a1 1 0 0 0 0-1.4l-1.4-1.4-10.4 8.2 1.4 1.4Z"/>
+                              <path fill="#FF3D00" d="m15.2 11.5 10.4 8.2a1 1 0 0 0 1.4-.1L21 18.2 15.2 11.5Z"/>
+                            </svg>
                             <div className="text-left leading-tight">
-                              <span className="text-[8px] text-gray-400 block uppercase font-semibold">Get it on</span>
-                              <span className="text-[10px] font-bold font-sans">Google Play</span>
+                              <span className="block text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-400">Get it on</span>
+                              <span className="text-[18px] font-bold font-sans sm:text-[19px]">Google Play</span>
                             </div>
                           </a>
                         </div>
@@ -182,7 +260,7 @@ export default function App() {
                     </div>
  
                     {/* Right Column: Redesigned Premium Hero Composition */}
-                    <div id="hero-right-col" className="relative flex items-center justify-center min-h-[640px] lg:min-h-[720px] w-full mt-10 lg:mt-0 select-none">
+                    <div id="hero-right-col" className="relative mt-4 flex w-full min-h-[300px] items-center justify-center px-2 select-none sm:mt-6 sm:min-h-[520px] sm:px-0 lg:mt-0 lg:min-h-[720px]">
                       
                       {/* Soft Blue Ambient Lighting & Glows */}
                       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] rounded-full bg-blue-500/8 blur-[120px] -z-10 animate-pulse pointer-events-none" style={{ animationDuration: '8s' }} />
@@ -238,7 +316,7 @@ export default function App() {
                       </div>
 
                       {/* BACKDROP CARD 1: Portfolio Widget (Behind Mentor, slightly offset left) */}
-                      <div className="absolute top-24 left-[2%] w-[200px] bg-white/40 backdrop-blur-md rounded-2xl border border-slate-200/30 p-3.5 shadow-[0_8px_30px_rgb(0,0,0,0.02)] -z-10 transform -rotate-2 select-none pointer-events-none">
+                      <div className="absolute top-[8%] left-[2%] w-[140px] -rotate-2 rounded-2xl border border-slate-200/30 bg-white/40 p-2.5 shadow-[0_8px_30px_rgb(0,0,0,0.02)] backdrop-blur-md select-none pointer-events-none sm:top-24 sm:left-[2%] sm:w-[200px] sm:p-3.5 max-[767px]:z-20">
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-[9px] font-bold text-slate-700 tracking-tight font-sans">PORTFOLIO INDEX</span>
                           <span className="text-[9px] font-bold text-emerald-500 font-mono">+28.4%</span>
@@ -255,7 +333,7 @@ export default function App() {
                       </div>
 
                       {/* BACKDROP CARD 2: Buy / Sell Signal Matrix (Behind Mentor, offset right) */}
-                      <div className="absolute bottom-28 right-[4%] w-[180px] bg-slate-950/80 backdrop-blur-lg rounded-2xl border border-white/5 p-3.5 shadow-2xl -z-10 transform rotate-3 select-none pointer-events-none">
+                      <div className="absolute bottom-[22%] right-[2%] w-[126px] rotate-3 rounded-2xl border border-white/5 bg-slate-950/80 p-2.5 shadow-2xl backdrop-blur-lg select-none pointer-events-none sm:bottom-28 sm:right-[4%] sm:w-[180px] sm:p-3.5 max-[767px]:z-20">
                         <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-white/5">
                           <span className="text-[8px] font-mono text-slate-400">LIQUIDITY MATRIX</span>
                           <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -278,7 +356,7 @@ export default function App() {
 
                       {/* Main Professional Portrait of the Founder / Trading Mentor (Up-scaled by ~25-30%) */}
                       <motion.div 
-                        className="relative w-[370px] h-[490px] sm:w-[440px] sm:h-[590px] lg:w-[470px] lg:h-[630px] xl:w-[500px] xl:h-[670px] flex items-end justify-center select-none z-10 lg:translate-y-14 lg:-mb-14"
+                        className="relative z-10 flex h-[340px] w-[260px] items-end justify-center overflow-hidden rounded-[28px] border border-slate-200/50 select-none shadow-[0_24px_50px_rgba(11,19,43,0.14)] sm:h-[430px] sm:w-[320px] lg:h-[630px] lg:w-[470px] lg:translate-y-14 lg:-mb-14 lg:rounded-[32px] xl:h-[670px] xl:w-[500px]"
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -287,7 +365,7 @@ export default function App() {
                         <img
                           src={mentorPortrait}
                           alt="Alex Vance - Money Factory Founder & Chief Mentor"
-                          className="w-full h-full object-cover object-top rounded-3xl shadow-[0_24px_50px_rgba(11,19,43,0.14)] border border-slate-200/50"
+                          className="h-full w-full rounded-[28px] border border-slate-200/50 object-contain object-center shadow-[0_24px_50px_rgba(11,19,43,0.14)] lg:rounded-[32px]"
                           referrerPolicy="no-referrer"
                         />
                         {/* Soft premium fade-out at the bottom to merge seamlessly with the page */}
@@ -307,81 +385,81 @@ export default function App() {
                       
                       {/* Card 1: 📈 Live Market */}
                       <motion.div
-                        className="absolute top-[8%] -left-[4%] backdrop-blur-md bg-white/85 border border-slate-200/40 shadow-[0_12px_30px_rgba(11,19,43,0.06)] rounded-2xl p-4 flex items-center gap-3.5 z-30 select-none cursor-default"
-                        animate={{ y: [0, -10, 0] }}
-                        transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+                        className="absolute top-[3%] left-[2%] z-30 flex items-center gap-2 rounded-2xl border border-slate-200/40 bg-white/85 p-2.5 shadow-[0_12px_30px_rgba(11,19,43,0.06)] backdrop-blur-md select-none cursor-default sm:top-[8%] sm:-left-[4%] sm:gap-3.5 sm:p-4 max-[767px]:w-[112px] max-[767px]:rounded-xl"
+                        animate={{ y: isMobile ? [0, -4, 0] : [0, -10, 0] }}
+                        transition={{ repeat: Infinity, duration: isMobile ? 8 : 6, ease: "easeInOut" }}
                         whileHover={{ scale: 1.05 }}
                       >
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 shrink-0 border border-emerald-500/20">
-                          <TrendingUp className="h-5 w-5" />
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-emerald-500/20 bg-emerald-500/10 text-emerald-600 sm:h-10 sm:w-10">
+                          <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5" />
                         </div>
                         <div>
-                          <h4 className="text-xs font-black text-[#0B132B] leading-none">Live Market</h4>
-                          <p className="text-[10px] text-slate-500 font-bold mt-1">BTC +4.2% · Gold Buy</p>
+                          <h4 className="text-[9px] font-black leading-none text-[#0B132B] sm:text-xs">Live Trade on Telegram</h4>
+                          <p className="mt-1 text-[8px] font-bold text-slate-500 sm:text-[10px]">Daily Live Trading Signals</p>
                         </div>
                       </motion.div>
 
                       {/* Card 2: 📊 Premium Indicators */}
                       <motion.div
-                        className="absolute top-[22%] -right-[4%] backdrop-blur-md bg-white/85 border border-slate-200/40 shadow-[0_12px_30px_rgba(11,19,43,0.06)] rounded-2xl p-4 flex items-center gap-3.5 z-30 select-none cursor-default"
-                        animate={{ y: [0, -12, 0] }}
-                        transition={{ repeat: Infinity, duration: 6.6, ease: "easeInOut", delay: 0.3 }}
+                        className="absolute top-[16%] right-[2%] z-30 flex items-center gap-2 rounded-2xl border border-slate-200/40 bg-white/85 p-2.5 shadow-[0_12px_30px_rgba(11,19,43,0.06)] backdrop-blur-md select-none cursor-default sm:top-[22%] sm:-right-[4%] sm:gap-3.5 sm:p-4 max-[767px]:w-[120px] max-[767px]:rounded-xl"
+                        animate={{ y: isMobile ? [0, -5, 0] : [0, -12, 0] }}
+                        transition={{ repeat: Infinity, duration: isMobile ? 8.5 : 6.6, ease: "easeInOut", delay: 0.3 }}
                         whileHover={{ scale: 1.05 }}
                       >
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-blue/10 text-primary-blue shrink-0 border border-blue-500/20">
-                          <Activity className="h-5 w-5" />
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-blue-500/20 bg-primary-blue/10 text-primary-blue sm:h-10 sm:w-10">
+                          <Activity className="h-4 w-4 sm:h-5 sm:w-5" />
                         </div>
                         <div>
-                          <h4 className="text-xs font-black text-[#0B132B] leading-none">Premium Indicators</h4>
-                          <p className="text-[10px] text-slate-500 font-bold mt-1">FVG & Orderflow Matrix</p>
+                          <h4 className="text-[9px] font-black leading-none text-[#0B132B] sm:text-xs">Money Factory Indicator</h4>
+                          <p className="mt-1 text-[8px] font-bold text-slate-500 sm:text-[10px]">Accurate Buy & Sell Signals</p>
                         </div>
                       </motion.div>
 
                       {/* Card 3: 🎓 Expert Mentorship */}
                       <motion.div
-                        className="absolute bottom-[30%] -left-[8%] backdrop-blur-md bg-white/85 border border-slate-200/40 shadow-[0_12px_30px_rgba(11,19,43,0.06)] rounded-2xl p-4 flex items-center gap-3.5 z-30 select-none cursor-default"
-                        animate={{ y: [0, -8, 0] }}
-                        transition={{ repeat: Infinity, duration: 5.6, ease: "easeInOut", delay: 0.6 }}
+                        className="absolute bottom-[24%] left-[2%] z-30 flex items-center gap-2 rounded-2xl border border-slate-200/40 bg-white/85 p-2.5 shadow-[0_12px_30px_rgba(11,19,43,0.06)] backdrop-blur-md select-none cursor-default sm:bottom-[30%] sm:-left-[8%] sm:gap-3.5 sm:p-4 max-[767px]:w-[128px] max-[767px]:rounded-xl"
+                        animate={{ y: isMobile ? [0, -4, 0] : [0, -8, 0] }}
+                        transition={{ repeat: Infinity, duration: isMobile ? 7.5 : 5.6, ease: "easeInOut", delay: 0.6 }}
                         whileHover={{ scale: 1.05 }}
                       >
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500/10 text-violet-600 shrink-0 border border-violet-500/20">
-                          <Users className="h-5 w-5" />
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-violet-500/20 bg-violet-500/10 text-violet-600 sm:h-10 sm:w-10">
+                          <Users className="h-4 w-4 sm:h-5 sm:w-5" />
                         </div>
                         <div>
-                          <h4 className="text-xs font-black text-[#0B132B] leading-none">Expert Mentorship</h4>
-                          <p className="text-[10px] text-slate-500 font-bold mt-1">1-on-1 Session Access</p>
+                          <h4 className="text-[9px] font-black leading-none text-[#0B132B] sm:text-xs">1200+ Profitable Students</h4>
+                          <p className="mt-1 text-[8px] font-bold text-slate-500 sm:text-[10px]">Trusted by Successful Traders</p>
                         </div>
                       </motion.div>
 
                       {/* Card 4: 📱 Mobile Learning */}
                       <motion.div
-                        className="absolute bottom-[18%] -right-[6%] backdrop-blur-md bg-white/85 border border-slate-200/40 shadow-[0_12px_30px_rgba(11,19,43,0.06)] rounded-2xl p-4 flex items-center gap-3.5 z-30 select-none cursor-default"
-                        animate={{ y: [0, -11, 0] }}
-                        transition={{ repeat: Infinity, duration: 7.2, ease: "easeInOut", delay: 0.1 }}
+                        className="absolute bottom-[13%] right-[2%] z-30 flex items-center gap-2 rounded-2xl border border-slate-200/40 bg-white/85 p-2.5 shadow-[0_12px_30px_rgba(11,19,43,0.06)] backdrop-blur-md select-none cursor-default sm:bottom-[18%] sm:-right-[6%] sm:gap-3.5 sm:p-4 max-[767px]:w-[124px] max-[767px]:rounded-xl"
+                        animate={{ y: isMobile ? [0, -4, 0] : [0, -11, 0] }}
+                        transition={{ repeat: Infinity, duration: isMobile ? 8.2 : 7.2, ease: "easeInOut", delay: 0.1 }}
                         whileHover={{ scale: 1.05 }}
                       >
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600 shrink-0 border border-amber-500/20">
-                          <Smartphone className="h-5 w-5" />
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-amber-500/20 bg-amber-500/10 text-amber-600 sm:h-10 sm:w-10">
+                          <Smartphone className="h-4 w-4 sm:h-5 sm:w-5" />
                         </div>
                         <div>
-                          <h4 className="text-xs font-black text-[#0B132B] leading-none">Mobile Learning</h4>
-                          <p className="text-[10px] text-slate-500 font-bold mt-1">Real-Time Signal Feeds</p>
+                          <h4 className="text-[9px] font-black leading-none text-[#0B132B] sm:text-xs">Mobile Learning & Live Sessions</h4>
+                          <p className="mt-1 text-[8px] font-bold text-slate-500 sm:text-[10px]">Learn Anywhere with Real-Time Updates</p>
                         </div>
                       </motion.div>
 
                       {/* Card 5: 💹 Trade Analytics */}
                       <motion.div
-                        className="absolute -bottom-[2%] left-[10%] backdrop-blur-md bg-white/85 border border-slate-200/40 shadow-[0_12px_30px_rgba(11,19,43,0.06)] rounded-2xl p-4 flex items-center gap-3.5 z-30 select-none cursor-default"
-                        animate={{ y: [0, -7, 0] }}
-                        transition={{ repeat: Infinity, duration: 6.2, ease: "easeInOut", delay: 0.9 }}
+                        className="absolute bottom-[1%] left-1/2 z-30 flex w-[138px] -translate-x-1/2 items-center gap-2 rounded-2xl border border-slate-200/40 bg-white/85 p-2.5 shadow-[0_12px_30px_rgba(11,19,43,0.06)] backdrop-blur-md select-none cursor-default sm:-bottom-[2%] sm:left-[10%] sm:w-auto sm:translate-x-0 sm:gap-3.5 sm:p-4 max-[767px]:rounded-xl"
+                        animate={{ y: isMobile ? [0, -3, 0] : [0, -7, 0] }}
+                        transition={{ repeat: Infinity, duration: isMobile ? 7.2 : 6.2, ease: "easeInOut", delay: 0.9 }}
                         whileHover={{ scale: 1.05 }}
                       >
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-600 shrink-0 border border-indigo-500/20">
-                          <Award className="h-5 w-5" />
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-indigo-500/20 bg-indigo-500/10 text-indigo-600 sm:h-10 sm:w-10">
+                          <Award className="h-4 w-4 sm:h-5 sm:w-5" />
                         </div>
                         <div>
-                          <h4 className="text-xs font-black text-[#0B132B] leading-none">Trade Analytics</h4>
-                          <p className="text-[10px] text-slate-500 font-bold mt-1">Risk/Reward 1:3.5 Ratio</p>
+                          <h4 className="text-[9px] font-black leading-none text-[#0B132B] sm:text-xs">Vishal Abhang</h4>
+                          <p className="mt-1 text-[8px] font-bold text-slate-500 sm:text-[10px]">Founder of Money Factory Indicator</p>
                         </div>
                       </motion.div>
 
@@ -394,7 +472,7 @@ export default function App() {
  
               {/* Trust Section - Floating Statistics Cards with Soft Shadows & Live Counters */}
               <section id="trust-stats-section" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-3">
                   
                   {/* Stat Card 1 */}
                   <motion.div 
@@ -406,48 +484,31 @@ export default function App() {
                       <Users className="h-6 w-6" />
                     </div>
                     <span className="text-3xl sm:text-4xl font-extrabold text-[#0B132B] tracking-tight">
-                      <AnimatedStat value={10000} suffix="+" />
+                      <AnimatedStat value={3000} suffix="+" />
                     </span>
                     <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mt-2">
-                      Active Students
+                      ACTIVE STUDENTS
                     </span>
                   </motion.div>
  
                   {/* Stat Card 2 */}
                   <motion.div 
-                    id="stat-card-sessions"
+                    id="stat-card-profit"
                     whileHover={{ y: -6 }}
                     className="bg-white rounded-2xl border border-slate-100 p-6 sm:p-8 shadow-[0_10px_30px_-5px_rgba(11,19,43,0.04)] hover:shadow-[0_20px_40px_-5px_rgba(11,19,43,0.08)] transition-all duration-300 flex flex-col items-center text-center group"
                   >
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-blue/5 text-primary-blue mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <Smartphone className="h-6 w-6" />
+                      <TrendingUp className="h-6 w-6" />
                     </div>
                     <span className="text-3xl sm:text-4xl font-extrabold text-[#0B132B] tracking-tight">
-                      <AnimatedStat value={500} suffix="K+" />
+                      <AnimatedStat value={1200} suffix="+" />
                     </span>
                     <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mt-2">
-                      App Downloads
+                      PROFITABLE TRADERS
                     </span>
                   </motion.div>
  
                   {/* Stat Card 3 */}
-                  <motion.div 
-                    id="stat-card-trustpilot"
-                    whileHover={{ y: -6 }}
-                    className="bg-white rounded-2xl border border-slate-100 p-6 sm:p-8 shadow-[0_10px_30px_-5px_rgba(11,19,43,0.04)] hover:shadow-[0_20px_40px_-5px_rgba(11,19,43,0.08)] transition-all duration-300 flex flex-col items-center text-center group"
-                  >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-blue/5 text-primary-blue mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <Video className="h-6 w-6" />
-                    </div>
-                    <span className="text-3xl sm:text-4xl font-extrabold text-[#0B132B] tracking-tight">
-                      <AnimatedStat value={100} suffix="+" />
-                    </span>
-                    <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mt-2">
-                      Live Sessions
-                    </span>
-                  </motion.div>
- 
-                  {/* Stat Card 4 */}
                   <motion.div 
                     id="stat-card-satisfaction"
                     whileHover={{ y: -6 }}
@@ -460,7 +521,7 @@ export default function App() {
                       <AnimatedStat value={4.9} decimals={1} suffix="★" />
                     </span>
                     <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mt-2">
-                      Student Rating
+                      STUDENT RATING
                     </span>
                   </motion.div>
  
@@ -490,99 +551,99 @@ export default function App() {
                   <div className="animate-marquee flex gap-6 py-6 px-4">
                     {[
                       {
-                        id: "james",
-                        name: "James Wilson",
-                        role: "Funded Trader",
-                        quote: "The institutional strategy course changed my entire perspective on how the markets work. I finally understand the 'why' behind price movements.",
+                        id: "om",
+                        name: "Om Raut",
+                        role: "Student",
+                        quote: "The course is very easy to understand. The live sessions and indicator helped me improve my trading.",
                         avatar: "https://picsum.photos/seed/james_wilson/150/150",
                         rating: 5,
                       },
                       {
-                        id: "sarah",
-                        name: "Sarah Jenkins",
-                        role: "Retail Trader",
-                        quote: "Their indicators are world-class. No lag, just pure price action data transformed into actionable signals. Best investment I've made.",
+                        id: "vishal",
+                        name: "Vishal Phatangare",
+                        role: "Student",
+                        quote: "I learned Forex from basic to advanced. The mentors explain everything in a simple way.",
                         avatar: "https://picsum.photos/seed/sarah_jenkins/150/150",
                         rating: 5,
                       },
                       {
-                        id: "marcus",
-                        name: "Marcus Thorne",
-                        role: "Swing Trader",
-                        quote: "The 1-on-1 mentorship sessions were worth every penny. I went from losing 2% every week to consistent profitability in just 3 months.",
+                        id: "prayag",
+                        name: "Prayag Pawbake",
+                        role: "Student",
+                        quote: "The Money Factory Indicator gives clear buy and sell signals. It has helped me trade with more confidence.",
                         avatar: "https://picsum.photos/seed/marcus_thorne/150/150",
                         rating: 5,
                       },
                       {
-                        id: "david",
-                        name: "David K.",
-                        role: "$200K Funded Specialist",
-                        quote: "Money Factory's automated mechanics are phenomenal. I passed my prop firm challenge in under 12 days using their liquidity sweeps indicator.",
+                        id: "prajwal",
+                        name: "Prajwal Rahane",
+                        role: "Student",
+                        quote: "The daily Telegram live trades are very helpful. I learn something new every day.",
                         avatar: "https://picsum.photos/seed/david_k/150/150",
                         rating: 5,
                       },
                       {
-                        id: "elena",
-                        name: "Elena Rostova",
-                        role: "Full-Time Day Trader",
-                        quote: "The live trading room sessions provide institutional order flow insights that you simply cannot find on YouTube. Highly recommended!",
+                        id: "ayush",
+                        name: "Ayush Sangale",
+                        role: "Student",
+                        quote: "The mobile app makes learning easy. I can watch lessons, practice anytime, and review topics whenever I want.",
                         avatar: "https://picsum.photos/seed/elena_r/150/150",
                         rating: 5,
                       },
                       {
-                        id: "brandon",
-                        name: "Brandon Vance",
-                        role: "SMC Enthusiast",
-                        quote: "Pure market mastery. The FVG indicators have completely transformed my entry precision. Risk-to-reward ratio has gone through the roof.",
+                        id: "sarthak",
+                        name: "Sarthak Gadekar",
+                        role: "Student",
+                        quote: "I recommend Money Factory to anyone who wants to learn trading. The course is simple and very useful.",
                         avatar: "https://picsum.photos/seed/brandon_v/150/150",
                         rating: 5,
                       }
                     ].concat([
                       {
-                        id: "james",
-                        name: "James Wilson",
-                        role: "Funded Trader",
-                        quote: "The institutional strategy course changed my entire perspective on how the markets work. I finally understand the 'why' behind price movements.",
+                        id: "om",
+                        name: "Om Raut",
+                        role: "Student",
+                        quote: "The course is very easy to understand. The live sessions and indicator helped me improve my trading.",
                         avatar: "https://picsum.photos/seed/james_wilson/150/150",
                         rating: 5,
                       },
                       {
-                        id: "sarah",
-                        name: "Sarah Jenkins",
-                        role: "Retail Trader",
-                        quote: "Their indicators are world-class. No lag, just pure price action data transformed into actionable signals. Best investment I've made.",
+                        id: "vishal",
+                        name: "Vishal Phatangare",
+                        role: "Student",
+                        quote: "I learned Forex from basic to advanced. The mentors explain everything in a simple way.",
                         avatar: "https://picsum.photos/seed/sarah_jenkins/150/150",
                         rating: 5,
                       },
                       {
-                        id: "marcus",
-                        name: "Marcus Thorne",
-                        role: "Swing Trader",
-                        quote: "The 1-on-1 mentorship sessions were worth every penny. I went from losing 2% every week to consistent profitability in just 3 months.",
+                        id: "prayag",
+                        name: "Prayag Pawbake",
+                        role: "Student",
+                        quote: "The Money Factory Indicator gives clear buy and sell signals. It has helped me trade with more confidence.",
                         avatar: "https://picsum.photos/seed/marcus_thorne/150/150",
                         rating: 5,
                       },
                       {
-                        id: "david",
-                        name: "David K.",
-                        role: "$200K Funded Specialist",
-                        quote: "Money Factory's automated mechanics are phenomenal. I passed my prop firm challenge in under 12 days using their liquidity sweeps indicator.",
+                        id: "prajwal",
+                        name: "Prajwal Rahane",
+                        role: "Student",
+                        quote: "The daily Telegram live trades are very helpful. I learn something new every day.",
                         avatar: "https://picsum.photos/seed/david_k/150/150",
                         rating: 5,
                       },
                       {
-                        id: "elena",
-                        name: "Elena Rostova",
-                        role: "Full-Time Day Trader",
-                        quote: "The live trading room sessions provide institutional order flow insights that you simply cannot find on YouTube. Highly recommended!",
+                        id: "ayush",
+                        name: "Ayush Sangale",
+                        role: "Student",
+                        quote: "The mobile app makes learning easy. I can watch lessons and practice anytime.",
                         avatar: "https://picsum.photos/seed/elena_r/150/150",
                         rating: 5,
                       },
                       {
-                        id: "brandon",
-                        name: "Brandon Vance",
-                        role: "SMC Enthusiast",
-                        quote: "Pure market mastery. The FVG indicators have completely transformed my entry precision. Risk-to-reward ratio has gone through the roof.",
+                        id: "sarthak",
+                        name: "Sarthak Gadekar",
+                        role: "Student",
+                        quote: "I recommend Money Factory to anyone who wants to learn trading. The course is simple and very useful.",
                         avatar: "https://picsum.photos/seed/brandon_v/150/150",
                         rating: 5,
                       }
@@ -666,8 +727,6 @@ export default function App() {
         </AnimatePresence>
       </main>
 
-      {/* Footer section */}
-      <Footer setActiveTab={setActiveTab} />
     </div>
   );
 }
