@@ -92,7 +92,7 @@ export default function App() {
               {/* Hero Section - Premium Two-Column Layout */}
               <section
                 id="hero-section"
-                className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white py-6 sm:py-24 lg:py-28"
+                className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white py-6 sm:py-24 lg:pt-5 lg:pb-20 xl:pt-5 xl:pb-20"
               >
                 <div className="absolute inset-0 -z-10 overflow-hidden">
                   <div className="absolute inset-0 bg-[linear-gradient(to_right,#2563EB_1px,transparent_1px),linear-gradient(to_bottom,#2563EB_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-[0.02]" />
@@ -220,20 +220,20 @@ export default function App() {
                         <h4 className="text-[10px] font-bold tracking-wider text-slate-400 uppercase">
                           Download the Money Factory App
                         </h4>
-                        <div className="flex flex-wrap items-center gap-3 sm:gap-5">
+                        <div className="mobile-download-badges flex items-center gap-3 sm:gap-5">
                           <a
                             id="hero-app-store-badge"
                             href="https://apps.apple.com/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex min-h-[72px] w-full max-w-[230px] items-center gap-3 rounded-xl border border-white/5 bg-slate-900 px-5 py-3.5 text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-black hover:shadow-md sm:min-h-[76px] sm:max-w-[240px]"
+                            className="mobile-download-badge flex min-h-[72px] w-full max-w-[230px] items-center gap-3 rounded-xl border border-white/5 bg-slate-900 px-5 py-3.5 text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-black hover:shadow-md sm:min-h-[76px] sm:max-w-[240px]"
                           >
                             <svg viewBox="0 0 24 24" className="h-7 w-7 shrink-0 sm:h-8 sm:w-8" fill="currentColor" aria-hidden="true">
                               <path d="M17.05 12.31c-.02-2.2 1.8-3.25 1.88-3.3-1.02-1.49-2.61-1.7-3.17-1.72-1.35-.14-2.64.79-3.33.79-.69 0-1.76-.77-2.89-.75-1.49.02-2.86.87-3.63 2.2-1.55 2.69-.4 6.67 1.11 8.86.74 1.07 1.62 2.28 2.77 2.24 1.11-.05 1.53-.72 2.87-.72 1.34 0 1.72.72 2.9.7 1.2-.02 1.96-1.08 2.69-2.16.84-1.24 1.19-2.44 1.21-2.5-.03-.01-2.32-.89-2.34-3.57ZM15.33 4.43c.57-.69.96-1.65.85-2.61-.82.03-1.81.55-2.4 1.24-.53.61-.99 1.58-.87 2.51.92.07 1.86-.46 2.42-1.14Z"/>
                             </svg>
                             <div className="text-left leading-tight">
-                              <span className="block text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-400">Download on the</span>
-                              <span className="text-[18px] font-bold font-sans sm:text-[19px]">App Store</span>
+                              <span className="badge-label block text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-400">Download on the</span>
+                              <span className="badge-text text-[18px] font-bold font-sans sm:text-[19px]">App Store</span>
                             </div>
                           </a>
                           <a
@@ -241,7 +241,7 @@ export default function App() {
                             href="https://play.google.com/store"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex min-h-[72px] w-full max-w-[230px] items-center gap-3 rounded-xl border border-white/5 bg-slate-900 px-5 py-3.5 text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-black hover:shadow-md sm:min-h-[76px] sm:max-w-[240px]"
+                            className="mobile-download-badge flex min-h-[72px] w-full max-w-[230px] items-center gap-3 rounded-xl border border-white/5 bg-slate-900 px-5 py-3.5 text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-black hover:shadow-md sm:min-h-[76px] sm:max-w-[240px]"
                           >
                             <svg viewBox="0 0 24 24" className="h-7 w-7 shrink-0 sm:h-8 sm:w-8" aria-hidden="true">
                               <path fill="#FFC107" d="M3.6 2.2A1 1 0 0 0 3 3.1v17.8a1 1 0 0 0 1.6.9l9.6-8.9-9.6-8.9Z"/>
@@ -251,8 +251,8 @@ export default function App() {
                               <path fill="#FF3D00" d="m15.2 11.5 10.4 8.2a1 1 0 0 0 1.4-.1L21 18.2 15.2 11.5Z"/>
                             </svg>
                             <div className="text-left leading-tight">
-                              <span className="block text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-400">Get it on</span>
-                              <span className="text-[18px] font-bold font-sans sm:text-[19px]">Google Play</span>
+                              <span className="badge-label block text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-400">Get it on</span>
+                              <span className="badge-text text-[18px] font-bold font-sans sm:text-[19px]">Google Play</span>
                             </div>
                           </a>
                         </div>
