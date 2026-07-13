@@ -14,7 +14,6 @@ import {
   Award, 
   Check, 
   ChevronRight, 
-  CheckCircle2, 
   TrendingDown, 
   DollarSign
 } from "lucide-react";
@@ -92,7 +91,7 @@ export default function App() {
               {/* Hero Section - Premium Two-Column Layout */}
               <section
                 id="hero-section"
-                className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white py-6 sm:py-24 lg:pt-5 lg:pb-20 xl:pt-5 xl:pb-20"
+                className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white py-3 sm:py-8 lg:pt-3 lg:pb-20 xl:pt-3 xl:pb-20"
               >
                 <div className="absolute inset-0 -z-10 overflow-hidden">
                   <div className="absolute inset-0 bg-[linear-gradient(to_right,#2563EB_1px,transparent_1px),linear-gradient(to_bottom,#2563EB_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-[0.02]" />
@@ -144,33 +143,11 @@ export default function App() {
                 </div>
 
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                  <div className="mb-5 flex flex-wrap items-center justify-center gap-2 rounded-full border border-slate-200/70 bg-white/75 px-3 py-2 shadow-[0_8px_24px_rgba(11,19,43,0.03)] backdrop-blur-md sm:mb-8 sm:justify-between sm:gap-3 sm:px-4 sm:py-3 sm:px-5 lg:mb-10">
-                    <div className="flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.24em] text-slate-500 sm:text-[10px]">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                      <span>Trusted by 3,000+ Students</span>
-                    </div>
-                    <div className="flex flex-wrap items-center justify-center gap-2 text-[9px] font-semibold uppercase tracking-[0.24em] text-slate-400 sm:gap-4 sm:text-[10px]">
-                      {['Forex Education', 'Live Market Learning', 'Premium Indicators', 'Expert Mentorship'].map((label) => (
-                        <div key={label} className="flex items-center gap-1.5 opacity-80">
-                          <CheckCircle2 className="h-3 w-3 text-slate-400" />
-                          <span>{label}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 items-center gap-8 sm:gap-12 lg:grid-cols-[45%_55%] lg:gap-16">
+                  <div className="hero-mobile-stack grid grid-cols-1 items-center gap-8 sm:gap-12 lg:grid-cols-[45%_55%] lg:gap-16">
                     
                     {/* Left Column - Elite FinTech Typography & CTA */}
-                    <div id="hero-left-col" className="space-y-4 text-center sm:space-y-8 sm:text-left">
+                    <div id="hero-left-col" className="hero-mobile-content space-y-4 text-center sm:space-y-8 sm:text-left">
                       
-                      {/* Premium Trust Badge */}
-                      <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-primary-blue/10 bg-primary-blue/5 px-3 py-1 shadow-[0_2px_12px_rgba(37,99,235,0.03)] sm:mx-0 sm:px-4 sm:py-1.5">
-                        <Star className="h-3 w-3 text-gold-premium fill-gold-premium" />
-                        <span className="text-xs font-bold text-slate-800 tracking-wide">
-                          Trustpilot <span className="text-primary-blue font-extrabold">4.9/5</span> Rating · Elite Financial Academy
-                        </span>
-                      </div>
- 
                       {/* Large Premium Headline */}
                       <h1 className="mx-auto mb-2 max-w-[300px] text-[2.1rem] leading-[1.05] font-extrabold tracking-[-0.03em] text-[#0B132B] sm:mx-0 sm:max-w-[430px] sm:text-[clamp(2.4rem,5vw,4.7rem)] lg:max-w-[560px] lg:text-[clamp(3rem,5.2vw,5.6rem)] xl:max-w-[620px] xl:text-[clamp(3.2rem,5.6vw,6.2rem)]">
                         <span className="block">Trade Smarter</span>
@@ -260,7 +237,7 @@ export default function App() {
                     </div>
  
                     {/* Right Column: Redesigned Premium Hero Composition */}
-                    <div id="hero-right-col" className="relative mt-4 flex w-full min-h-[300px] items-center justify-center px-2 select-none sm:mt-6 sm:min-h-[520px] sm:px-0 lg:mt-0 lg:min-h-[720px]">
+                    <div id="hero-right-col" className="hero-mobile-image relative mt-4 flex w-full min-h-[300px] items-center justify-center px-2 select-none sm:mt-6 sm:min-h-[520px] sm:px-0 lg:mt-0 lg:min-h-[720px]">
                       
                       {/* Soft Blue Ambient Lighting & Glows */}
                       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] rounded-full bg-blue-500/8 blur-[120px] -z-10 animate-pulse pointer-events-none" style={{ animationDuration: '8s' }} />
@@ -385,7 +362,7 @@ export default function App() {
                       
                       {/* Card 1: 📈 Live Market */}
                       <motion.div
-                        className="absolute top-[3%] left-[2%] z-30 flex items-center gap-2 rounded-2xl border border-slate-200/40 bg-white/85 p-2.5 shadow-[0_12px_30px_rgba(11,19,43,0.06)] backdrop-blur-md select-none cursor-default sm:top-[8%] sm:-left-[4%] sm:gap-3.5 sm:p-4 max-[767px]:w-[112px] max-[767px]:rounded-xl"
+                        className="hero-mobile-floating-card absolute top-[3%] left-[2%] z-30 flex items-center gap-2 rounded-2xl border border-slate-200/40 bg-white/85 p-2.5 shadow-[0_12px_30px_rgba(11,19,43,0.06)] backdrop-blur-md select-none cursor-default sm:top-[8%] sm:-left-[4%] sm:gap-3.5 sm:p-4 max-[767px]:w-[112px] max-[767px]:rounded-xl"
                         animate={{ y: isMobile ? [0, -4, 0] : [0, -10, 0] }}
                         transition={{ repeat: Infinity, duration: isMobile ? 8 : 6, ease: "easeInOut" }}
                         whileHover={{ scale: 1.05 }}
@@ -401,7 +378,7 @@ export default function App() {
 
                       {/* Card 2: 📊 Premium Indicators */}
                       <motion.div
-                        className="absolute top-[16%] right-[2%] z-30 flex items-center gap-2 rounded-2xl border border-slate-200/40 bg-white/85 p-2.5 shadow-[0_12px_30px_rgba(11,19,43,0.06)] backdrop-blur-md select-none cursor-default sm:top-[22%] sm:-right-[4%] sm:gap-3.5 sm:p-4 max-[767px]:w-[120px] max-[767px]:rounded-xl"
+                        className="hero-mobile-floating-card absolute top-[16%] right-[2%] z-30 flex items-center gap-2 rounded-2xl border border-slate-200/40 bg-white/85 p-2.5 shadow-[0_12px_30px_rgba(11,19,43,0.06)] backdrop-blur-md select-none cursor-default sm:top-[22%] sm:-right-[4%] sm:gap-3.5 sm:p-4 max-[767px]:w-[120px] max-[767px]:rounded-xl"
                         animate={{ y: isMobile ? [0, -5, 0] : [0, -12, 0] }}
                         transition={{ repeat: Infinity, duration: isMobile ? 8.5 : 6.6, ease: "easeInOut", delay: 0.3 }}
                         whileHover={{ scale: 1.05 }}
@@ -417,7 +394,7 @@ export default function App() {
 
                       {/* Card 3: 🎓 Expert Mentorship */}
                       <motion.div
-                        className="absolute bottom-[24%] left-[2%] z-30 flex items-center gap-2 rounded-2xl border border-slate-200/40 bg-white/85 p-2.5 shadow-[0_12px_30px_rgba(11,19,43,0.06)] backdrop-blur-md select-none cursor-default sm:bottom-[30%] sm:-left-[8%] sm:gap-3.5 sm:p-4 max-[767px]:w-[128px] max-[767px]:rounded-xl"
+                        className="hero-mobile-floating-card absolute bottom-[24%] left-[2%] z-30 flex items-center gap-2 rounded-2xl border border-slate-200/40 bg-white/85 p-2.5 shadow-[0_12px_30px_rgba(11,19,43,0.06)] backdrop-blur-md select-none cursor-default sm:bottom-[30%] sm:-left-[8%] sm:gap-3.5 sm:p-4 max-[767px]:w-[128px] max-[767px]:rounded-xl"
                         animate={{ y: isMobile ? [0, -4, 0] : [0, -8, 0] }}
                         transition={{ repeat: Infinity, duration: isMobile ? 7.5 : 5.6, ease: "easeInOut", delay: 0.6 }}
                         whileHover={{ scale: 1.05 }}
@@ -433,7 +410,7 @@ export default function App() {
 
                       {/* Card 4: 📱 Mobile Learning */}
                       <motion.div
-                        className="absolute bottom-[13%] right-[2%] z-30 flex items-center gap-2 rounded-2xl border border-slate-200/40 bg-white/85 p-2.5 shadow-[0_12px_30px_rgba(11,19,43,0.06)] backdrop-blur-md select-none cursor-default sm:bottom-[18%] sm:-right-[6%] sm:gap-3.5 sm:p-4 max-[767px]:w-[124px] max-[767px]:rounded-xl"
+                        className="hero-mobile-floating-card absolute bottom-[13%] right-[2%] z-30 flex items-center gap-2 rounded-2xl border border-slate-200/40 bg-white/85 p-2.5 shadow-[0_12px_30px_rgba(11,19,43,0.06)] backdrop-blur-md select-none cursor-default sm:bottom-[18%] sm:-right-[6%] sm:gap-3.5 sm:p-4 max-[767px]:w-[124px] max-[767px]:rounded-xl"
                         animate={{ y: isMobile ? [0, -4, 0] : [0, -11, 0] }}
                         transition={{ repeat: Infinity, duration: isMobile ? 8.2 : 7.2, ease: "easeInOut", delay: 0.1 }}
                         whileHover={{ scale: 1.05 }}
@@ -449,7 +426,7 @@ export default function App() {
 
                       {/* Card 5: 💹 Trade Analytics */}
                       <motion.div
-                        className="absolute bottom-[1%] left-1/2 z-30 flex w-[138px] -translate-x-1/2 items-center gap-2 rounded-2xl border border-slate-200/40 bg-white/85 p-2.5 shadow-[0_12px_30px_rgba(11,19,43,0.06)] backdrop-blur-md select-none cursor-default sm:-bottom-[2%] sm:left-[10%] sm:w-auto sm:translate-x-0 sm:gap-3.5 sm:p-4 max-[767px]:rounded-xl"
+                        className="hero-mobile-floating-card absolute bottom-[1%] left-1/2 z-30 flex w-[138px] -translate-x-1/2 items-center gap-2 rounded-2xl border border-slate-200/40 bg-white/85 p-2.5 shadow-[0_12px_30px_rgba(11,19,43,0.06)] backdrop-blur-md select-none cursor-default sm:-bottom-[2%] sm:left-[10%] sm:w-auto sm:translate-x-0 sm:gap-3.5 sm:p-4 max-[767px]:rounded-xl"
                         animate={{ y: isMobile ? [0, -3, 0] : [0, -7, 0] }}
                         transition={{ repeat: Infinity, duration: isMobile ? 7.2 : 6.2, ease: "easeInOut", delay: 0.9 }}
                         whileHover={{ scale: 1.05 }}
