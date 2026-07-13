@@ -106,24 +106,61 @@
 }
 
 @media (max-width: 768px) {
+  #hero-section {
+    padding: 24px 16px 24px;
+    overflow-x: hidden;
+  }
+
   .hero-mobile-stack {
     display: flex !important;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .hero-mobile-image {
     order: 1;
     width: 100%;
-    max-width: 360px;
+    max-width: 300px;
     min-height: auto !important;
     height: auto !important;
     margin: 0 auto;
-    padding: 0 0 1rem;
+    padding: 0 0 0.5rem;
     justify-content: center;
     align-items: center;
-    overflow: visible;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-mobile-portrait {
+    width: min(100%, 300px) !important;
+    max-width: 300px;
+    height: auto !important;
+    aspect-ratio: auto;
+    margin: 0 auto;
+    padding-top: 20px;
+    box-shadow: 0 18px 45px rgba(11, 19, 43, 0.12);
+    border-radius: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-mobile-portrait img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    object-fit: contain;
+    object-position: center top;
+    transform: none;
+    border-radius: inherit;
+  }
+
+  #hero-right-col {
+    margin-top: 0;
+    min-height: auto !important;
+    padding: 0;
+    width: 100%;
   }
 
   .hero-mobile-content {
@@ -137,6 +174,16 @@
     margin-top: 24px;
   }
 
+  .hero-mobile-content h1 {
+    margin-bottom: 0.75rem;
+    max-width: 100%;
+  }
+
+  .hero-mobile-content p {
+    margin-bottom: 1rem;
+    max-width: 100%;
+  }
+
   .hero-mobile-content #hero-features-list {
     max-width: 100%;
     width: 100%;
@@ -147,9 +194,20 @@
     max-width: 100%;
   }
 
-  .hero-mobile-floating-card {
-    transform: scale(0.82);
-    transform-origin: center center;
+  .hero-mobile-floating-card,
+  .hero-mobile-image > .absolute,
+  #hero-right-col > svg,
+  #hero-right-col > div[class*="bg-blue-500/8"],
+  #hero-right-col > div[class*="bg-indigo-500/5"],
+  #hero-right-col > div[class*="bg-emerald-500/4"],
+  #hero-right-col > div[class*="absolute top-[8%]"],
+  #hero-right-col > div[class*="absolute bottom-[22%]"],
+  #hero-right-col > div[class*="absolute top-[3%]"],
+  #hero-right-col > div[class*="absolute top-[16%]"],
+  #hero-right-col > div[class*="absolute bottom-[24%]"],
+  #hero-right-col > div[class*="absolute bottom-[13%]"],
+  #hero-right-col > div[class*="absolute bottom-[1%]"] {
+    display: none !important;
   }
 
   .mobile-download-badges {

@@ -333,7 +333,7 @@ export default function App() {
 
                       {/* Main Professional Portrait of the Founder / Trading Mentor (Up-scaled by ~25-30%) */}
                       <motion.div 
-                        className="relative z-10 flex h-[340px] w-[260px] items-end justify-center overflow-hidden rounded-[28px] border border-slate-200/50 select-none shadow-[0_24px_50px_rgba(11,19,43,0.14)] sm:h-[430px] sm:w-[320px] lg:h-[630px] lg:w-[470px] lg:translate-y-14 lg:-mb-14 lg:rounded-[32px] xl:h-[670px] xl:w-[500px]"
+                        className="hero-mobile-portrait relative z-10 flex h-[340px] w-[260px] items-end justify-center overflow-hidden rounded-[28px] border border-slate-200/50 select-none shadow-[0_24px_50px_rgba(11,19,43,0.14)] sm:h-[430px] sm:w-[320px] lg:h-[630px] lg:w-[470px] lg:translate-y-14 lg:-mb-14 lg:rounded-[32px] xl:h-[670px] xl:w-[500px]"
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -352,8 +352,8 @@ export default function App() {
                         <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md px-5 py-3.5 rounded-2xl border border-slate-200/40 shadow-xl flex items-center gap-3 z-20">
                           <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
                           <div className="min-w-0">
-                            <h4 className="text-xs font-black text-slate-800 leading-none">Alex Vance</h4>
-                            <p className="text-[10px] text-slate-400 mt-1.5 font-bold leading-none tracking-wide">Founder & Chief Trading Officer</p>
+                            <h4 className="text-xs font-black text-slate-800 leading-none">Vishal Abhang</h4>
+                            <p className="text-[10px] text-slate-400 mt-1.5 font-bold leading-none tracking-wide">Founder of Money Factory Indicator</p>
                           </div>
                         </div>
                       </motion.div>
