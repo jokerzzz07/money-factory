@@ -9,13 +9,13 @@ interface HeaderProps {
 
 const socialItems = [
   {
-    href: "https://www.instagram.com/trader_vicky1?igsh=bGducWJsc2xjcDBm",
+    href: "https://www.instagram.com/money_factory_app?igsh=Z2p4NGZlcGpjZjZ3&utm_source=qr",
     label: "Follow Money Factory on Instagram",
     icon: Instagram,
     external: true,
   },
   {
-    href: "https://t.me/money_factory_indicator",
+    href: "https://telegram.me/+Ile_VK3qSwM3Nzhl",
     label: "Join Money Factory Telegram",
     icon: Send,
     external: true,
